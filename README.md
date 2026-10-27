@@ -63,6 +63,11 @@ brew upgrade --cask --greedy ghosterm-dev
 所以要 `--greedy`；不想每次带参数就设 `export HOMEBREW_UPGRADE_GREEDY=1`。
 升级前请先退出正在跑的 Ghosterm。
 
+实测：dev 资产没重打时它会说 `Not upgrading ghosterm-dev, the downloaded artifact has
+not changed` 而不是重装一次——`sha256 :no_check` 下没有可比对的校验和，它判的是
+「下载物变没变」，不是字节对不对。主仓库推了新包之后这条命令才会真重下并覆盖
+`/Applications/Ghosterm.app`。
+
 ## `sha256 :no_check`：这条路的代价，说清楚
 
 cask **不校验字节**。原因是 dev 渠道的物理事实：滚动 tag `dev` 每轮被强删重建，
